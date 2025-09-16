@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Syrian Refugee Aid</title>
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+  <!-- AOS for scroll animations -->
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+    rel="stylesheet"
+  >
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #e9edf0 0%, #ffffff 100%);
+      color: #2c3e50;
+    }
+    a { text-decoration: none; }
+
+    /* Hero */
+    header {
+      position: relative;
+      background: url("refugee_bg.jpg") center/cover no-repeat;
+      color: #fff; text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+      padding: 6rem 1rem; margin-bottom: 2rem;
+    }
+    header::before {
+      content:""; position:absolute; inset:0;
+      background:rgba(0,0,0,0.45);
+    }
+    header .container { position: relative; z-index: 1; }
+    header h1 { font-size: 3rem; margin-bottom: .5rem; }
+    header p.lead { font-size: 1.25rem; margin-bottom: 1.5rem; }
+
+    /* “About the Crisis” (Aya’s only contribution) */
+    #crisis {
+      max-width: 800px;
+      margin: 0 auto 3rem;
+      background: #fff;
+      border-radius: .5rem;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    #crisis h2 {
+      color: #005b99;
+      margin-bottom: 1rem;
+    }
+    #crisis p, #crisis ul { margin-bottom: 1rem; }
+
+    /* The Thermometer */
+    #thermometer {
+      max-width: 500px; margin: -2rem auto 3rem;
+      background: #f8fafc; border-radius: .5rem;
+      padding: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .progress { height: 1.25rem; }
+    #progressBar {
+      width: 0; transition: width .6s ease;
+    }
+
+    /* Cards */
+    .card {
+      transition: transform .3s, box-shadow .3s;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+    }
+    .card-title { font-weight: 600; }
+
+    /* Buttons */
+    .btn-primary {
+      background-color: #005b99; border-color: #004f8c;
+      transition: background .3s;
+    }
+    .btn-primary:hover {
+      background-color: #004f8c;
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero -->
+  <header class="text-center text-white">
+    <div class="container">
+      <h1>Syrian Refugee Aid</h1>
+      <p class="lead">Support food, medicine, clothing &amp; education</p>
+      <a href="#donations" class="btn btn-light btn-lg">Explore Causes</a>
+    </div>
+  </header>
+
+  <!-- About the Crisis -->
+  <section id="crisis" data-aos="fade-up">
+    <h2>About the Crisis</h2>
+    <p>The Syrian civil war has been raging since 2011, leaving a massive impact on the country and its residents. Millions have been displaced—many forced to flee Syria in search of refuge elsewhere; others remain in camps or survive under brutal conditions.</p>
+    <p>Your donation will help provide:</p>
+    <ul>
+      <li>Food and clean water</li>
+      <li>Emergency shelter</li>
+      <li>Medical care</li>
+      <li>Education for children</li>
+      <li>Rebuilding homes</li>
+      <li>Hygienic products</li>
+    </ul>
+  </section>
+
+  <!-- Thermometer -->
+  <div id="thermometer" data-aos="fade-up">
+    <h5>Fundraising Progress</h5>
+    <div class="d-flex justify-content-between mb-1">
+      <small id="raisedLabel">£0</small>
+      <small>£100,000 goal</small>
+    </div>
+    <div class="progress">
+      <div
+        id="progressBar"
+        class="progress-bar"
+        role="progressbar"
+        aria-label="Fundraising progress"
+        aria-valuenow="0"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      ></div>
+    </div>
+  </div>
+
+  <!-- Donation Cards -->
+  <main id="donations" class="container mb-5">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <!-- Food -->
+      <div class="col" data-aos="fade-up">
+        <div class="card h-100 shadow-sm">
+          <img src="Food.jpg" class="card-img-top" alt="Food aid">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Food Assistance</h5>
+            <p class="card-text">
+              4.3 million Syrians rely on monthly food distributions.
+            </p>
+            <button class="btn btn-primary mt-auto donate-btn" data-cause="Food Assistance">
+              Donate
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Medical -->
+      <div class="col" data-aos="fade-up" data-aos-delay="100">
+        <div class="card h-100 shadow-sm">
+          <img src="Medicine.jpg" class="card-img-top" alt="Medical supplies">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Medical Supplies</h5>
+            <p class="card-text">
+              Partnered with UNHCR, we deliver essential healthcare kits and medicines.
+            </p>
+            <button class="btn btn-primary mt-auto donate-btn" data-cause="Medical Supplies">
+              Donate
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Clothing -->
+      <div class="col" data-aos="fade-up" data-aos-delay="200">
+        <div class="card h-100 shadow-sm">
+          <img src="Clothes.jpg" class="card-img-top" alt="Clothing donation">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Clothing</h5>
+            <p class="card-text">
+              Extra clothes—seasonal, everyday, children’s &amp; adults’ provide dignity and comfort.
+            </p>
+            <button class="btn btn-primary mt-auto donate-btn" data-cause="Clothing">
+              Donate
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div class="col" data-aos="fade-up" data-aos-delay="300">
+        <div class="card h-100 shadow-sm">
+          <img src="Education.jpg" class="card-img-top" alt="Education programs">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Education Programs</h5>
+            <p class="card-text">
+              3.7 million Syrian children remain out of school, your support brings learning back.
+            </p>
+            <button class="btn btn-primary mt-auto donate-btn" data-cause="Education Programs">
+              Donate
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- All Causes -->
+      <div class="col" data-aos="fade-up" data-aos-delay="400">
+        <div class="card h-100 shadow-sm">
+          <img src="All causes.jpg" class="card-img-top" alt="Support all causes">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Support All Causes</h5>
+            <p class="card-text">
+              One gift covers food, medicine, clothing &amp; education together.
+            </p>
+            <button class="btn btn-primary mt-auto donate-btn" data-cause="Support All Causes">
+              Donate
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Donation Modal -->
+  <div
+    class="modal fade"
+    id="donationModal"
+    tabindex="-1"
+    aria-labelledby="donationModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="donationForm" novalidate>
+          <div class="modal-header">
+            <h5 class="modal-title" id="donationModalLabel">
+              Give to <strong id="modalCause"></strong>
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div id="formContent">
+              <div class="mb-3">
+                <label for="donorName" class="form-label">Your Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="donorName"
+                  placeholder="Full name"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="donationSlider" class="form-label">Amount (GBP)</label>
+                <div class="d-flex align-items-center gap-3">
+                  <input
+                    type="range"
+                    class="form-range"
+                    id="donationSlider"
+                    min="5"
+                    max="500"
+                    step="5"
+                    value="50"
+                  />
+                  <input
+                    type="number"
+                    class="form-control w-25"
+                    id="donationAmount"
+                    min="5"
+                    value="50"
+                    required
+                  />
+                </div>
+                <div class="form-text">Slide or type to choose your gift</div>
+              </div>
+              <div class="mb-3">
+                <label for="cardNumber" class="form-label">Card Number</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="cardNumber"
+                  placeholder="1234 5678 9012 3456"
+                  pattern="\d{4} \d{4} \d{4} \d{4}"
+                  required
+                />
+                <div class="form-text">Format: 4×4 digits</div>
+              </div>
+              <div class="row gx-2">
+                <div class="col">
+                  <label for="expiryDate" class="form-label">Expiry (MM/YY)</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="expiryDate"
+                    placeholder="MM/YY"
+                    pattern="(0[1-9]|1[0-2])\/\d{2}"
+                    required
+                  />
+                </div>
+                <div class="col">
+                  <label for="cvv" class="form-label">CVV</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="cvv"
+                    placeholder="123"
+                    pattern="\d{3}"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Thank-You (hidden until after donation) -->
+            <div id="thankYouMessage" class="text-center d-none">
+              <h5 class="mb-3">Thank you for your support.</h5>
+              <p id="thankYouText"></p>
+              <button
+                type="button"
+                class="btn btn-success"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <!-- Only donate button here -->
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+              Donate
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- Bootstrap JS, AOS & custom logic -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+   
+    AOS.init({ once: true, duration: 600 });
+
+    
+    let raised = parseInt(localStorage.getItem('raised'), 10);
+    if (isNaN(raised)) {
+      raised = Math.floor(Math.random() * 30000) + 10000;
+    }
+    const goal = 100000;
+    const bar   = document.getElementById("progressBar");
+    const label = document.getElementById("raisedLabel");
+
+    function updateThermometer() {
+      
+      const pct = Math.min((raised/goal)*100, 100).toFixed(1);
+      bar.style.width = pct + "%";
+      bar.setAttribute("aria-valuenow", pct);
+      label.textContent = "£" + raised.toLocaleString();
+    
+      localStorage.setItem('raised', raised);
+    }
+    updateThermometer();
+
+    
+    const slider = document.getElementById("donationSlider");
+    const numIn  = document.getElementById("donationAmount");
+    slider.addEventListener("input", ()=> numIn.value = slider.value);
+    numIn.addEventListener("change", () => {
+      let v = Math.max(5, Math.min(500, +numIn.value));
+      slider.value = numIn.value = v;
+    });
+
+   
+    document.querySelectorAll(".donate-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.getElementById("modalCause").textContent = btn.dataset.cause;
+        document.getElementById("formContent").classList.remove("d-none");
+        document.getElementById("thankYouMessage").classList.add("d-none");
+        document.getElementById("submitBtn").style.display = "inline-block";
+        document.getElementById("donationForm").classList.remove("was-validated");
+        document.getElementById("donationForm").reset();
+        slider.value = numIn.value = 50;
+        new bootstrap.Modal(document.getElementById("donationModal")).show();
+      });
+    });
+
+    
+    document.getElementById("donationForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const form = e.target;
+      if (!form.checkValidity()) {
+        form.classList.add("was-validated");
+        return;
+      }
+
+      const name  = document.getElementById("donorName").value.trim() || "Supporter";
+      const amt   = +numIn.value;
+      const cause = document.getElementById("modalCause").textContent;
+
+      
+      raised += amt;
+      updateThermometer();
+
+      
+      confetti({ particleCount:150, spread:90, origin:{ y:0.6 } });
+
+      
+      document.getElementById("thankYouText").textContent =
+        `${name}, your £${amt.toLocaleString()} gift to ${cause} is on its way.`;
+      document.getElementById("formContent").classList.add("d-none");
+      document.getElementById("thankYouMessage").classList.remove("d-none");
+      document.getElementById("submitBtn").style.display = "none";
+    });
+  </script>
+</body>
+</html>

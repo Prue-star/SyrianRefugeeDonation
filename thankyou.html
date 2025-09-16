@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thanks from Syrian Refugee Aid</title>
+
+  <!-- Bootstrap CSS -->
+  <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
+    rel="stylesheet"
+  >
+  <!-- AOS (Animate on Scroll) -->
+  <link 
+    href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" 
+    rel="stylesheet"
+  >
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #eef2f5 0%, #ffffff 100%);
+      color: #2c3e50;
+    }
+    .emoji {
+      display: inline-block;
+      font-size: 2rem;
+      animation: bounce 2s infinite;
+      margin-left: .5rem;
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateY(0); }
+      50%     { transform: translateY(-8px); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container h-100">
+    <div 
+      class="row justify-content-center align-items-center h-100" 
+      data-aos="zoom-in"
+    >
+      <div class="col-11 col-md-8 col-lg-6">
+        <div class="card shadow-sm p-4 text-center">
+          <h1 class="mb-3">
+            Thank You! <span class="emoji">🎉</span>
+          </h1>
+          <p class="mb-2">
+            We’re so glad you took the time to explore our 3D web billboard, 
+            learn about Syrian refugees, and experience our site.
+          </p>
+          <p class="mb-4">
+            From Prudence, Aya &amp; Joshua, thank you for keeping an open mind 
+            and for being here. We hope you discovered something meaningful today!
+          </p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a href="donation.html"    class="btn btn-primary">Donate Again</a>
+            <a href="index.html"       class="btn btn-outline-primary">Home</a>
+            <a href="billboard.html"   class="btn btn-outline-primary">Billboard</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    // Confetti burst on load
+    window.addEventListener('load', () => {
+      confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 } });
+      AOS.init({ once: true, duration: 800 });
+    });
+  </script>
+</body>
+</html>
